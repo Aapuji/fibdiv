@@ -10,6 +10,7 @@
    fib | 1 1 2 3 5  8  13 ..
    sum | 1 2 4 7 12 20 33 ..
 *)
+
 let fibdiv n = 
   let rec f n fibs slice fsi = 
     let gen_fib fib slice = match slice with
