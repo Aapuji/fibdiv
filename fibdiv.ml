@@ -14,18 +14,18 @@
 let fibdiv n = 
   let rec f n acc fibs slice fsi = 
     let gen_fib fib slice = match slice with
-      | a::b::[] -> (fibs @ (a + b)::[], b::(a + b)::[])
+      | a::b::[] -> (fibs @ [a + b], [b; a + b])
       | _ -> assert false
     in 
     match n with
-      | 0 -> acc @ fsi::[] @ 0::[]
+      | 0 -> acc @ [fsi] @ [0]
       | n -> if n > List.hd slice then
           let (fibs', slice') = gen_fib fibs slice in
           f (n - List.hd slice) acc fibs' slice' (fsi + 1)
         else if n == List.hd slice then
-          acc @ fsi::[] @ 0::[]
+          acc @ [fsi] @ [0]
         else
-          f n (acc @ (fsi - 1)::[]) fibs [1; 1] 1 
+          f n (acc @ [fsi - 1]) fibs [1; 1] 1 
   in match n with
     | 0 -> [0]
     | n -> f n [] [1; 1] [1; 1] 1
